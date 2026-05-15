@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Poppers Pilipinas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-dark text-white">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="{% url 'products:index' %}" class="btn btn-outline-light">
+                <i class="bi bi-arrow-left"></i> Continue shopping
+            </a>
+            <span class="badge bg-warning text-dark fs-6">
+                <i class="bi bi-cart-fill"></i> Items: {{ cart_item_count|default:"0" }}
+            </span>
+        </div>
+
+        {% if messages %}
+            <div class="alert alert-light text-dark mb-4">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <h1 class="mb-4">Your Cart</h1>
+
+        {% if cart_items %}
+            <div class="table-responsive">
+                <table class="table table-dark table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                            <tr>
+                                <td>{{ item.product.prodname }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>₱ {{ item.product.price }}</td>
+                                <td>₱ {{ item.line_total }}</td>
+                                <td>
+                                    <form method="post" action="{% url 'products:remove_from_cart' item.product.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash-fill"></i> Remove
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-end align-items-center gap-3 mt-4">
+                <strong class="fs-4">Total:</strong>
+                <span class="fs-4 text-warning">₱ {{ total_price }}</span>
+            </div>
+            <div class="mt-4 text-end">
+                <form method="post" action="{% url 'products:checkout' %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-bag-check-fill"></i> Checkout
+                    </button>
+                </form>
+            </div>
+        {% else %}
+            <div class="alert alert-secondary">Your cart is empty. Add some products to continue.</div>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
