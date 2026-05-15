@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poppers Pilipinas | Products</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+
+        :root{
+            --red: #CE1126;
+            --blue: #0038A8;
+            --yellow: #FCD116;
+            --white: #ffffff;
+            --dark: #0f172a;
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Poppins', sans-serif;
+            min-height:100vh;
+            overflow-x:hidden;
+            background:
+                radial-gradient(circle at top left, rgba(252,209,22,0.25), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(206,17,38,0.20), transparent 35%),
+                linear-gradient(135deg, #001847, #0038A8, #CE1126);
+            position:relative;
+        }
+
+        /* Animated Background */
+
+        .bg-glow{
+            position:fixed;
+            width:400px;
+            height:400px;
+            border-radius:50%;
+            filter:blur(120px);
+            z-index:0;
+            animation:floatGlow 10s infinite alternate ease-in-out;
+        }
+
+        .bg-glow.one{
+            background:rgba(252,209,22,0.25);
+            top:-100px;
+            left:-100px;
+        }
+
+        .bg-glow.two{
+            background:rgba(206,17,38,0.25);
+            bottom:-100px;
+            right:-100px;
+            animation-delay:2s;
+        }
+
+        .bg-glow.three{
+            background:rgba(255,255,255,0.18);
+            top:40%;
+            left:40%;
+            animation-delay:4s;
+        }
+
+        /* Stars and Sparkles */
+
+        .stars{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            pointer-events:none;
+            z-index:0;
+        }
+
+        .star{
+            position:absolute;
+            background:radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(252,209,22,0.7) 50%, transparent 100%);
+            border-radius:50%;
+            box-shadow:0 0 8px rgba(255,255,255,0.8), 0 0 16px rgba(252,209,22,0.6);
+            animation:twinkle 3s infinite ease-in-out;
+        }
+
+        .star:nth-child(odd){
+            animation-delay:-1s;
+            animation-duration:4s;
+        }
+
+        .star:nth-child(3n){
+            animation-delay:-2s;
+            animation-duration:5s;
+        }
+
+        .star:nth-child(5n){
+            animation-delay:-0.5s;
+            animation-duration:2.5s;
+        }
+
+        .sparkle{
+            position:absolute;
+            color:#FCD116;
+            font-size:16px;
+            text-shadow:0 0 8px rgba(252,209,22,0.8), 0 0 16px rgba(252,209,22,0.6);
+            animation:sparkleFloat 6s infinite ease-in-out;
+            opacity:0.8;
+        }
+
+        .sparkle:nth-child(even){
+            animation-delay:-3s;
+            animation-duration:8s;
+        }
+
+        .sparkle:nth-child(4n){
+            animation-delay:-1.5s;
+            animation-duration:7s;
+        }
+
+        @keyframes twinkle{
+            0%, 100%{
+                opacity:0.3;
+                transform:scale(1);
+            }
+            50%{
+                opacity:1;
+                transform:scale(1.2);
+            }
+        }
+
+        @keyframes sparkleFloat{
+            0%, 100%{
+                transform:translateY(0) rotate(0deg);
+                opacity:0.8;
+            }
+            25%{
+                transform:translateY(-20px) rotate(90deg);
+                opacity:1;
+            }
+            50%{
+                transform:translateY(-10px) rotate(180deg);
+                opacity:0.6;
+            }
+            75%{
+                transform:translateY(-30px) rotate(270deg);
+                opacity:0.9;
+            }
+        }
+
+        /* Philippine Sun */
+
+        .philippine-sun{
+            position:fixed;
+            top:50px;
+            left:50px;
+            width:120px;
+            height:120px;
+            z-index:0;
+            animation:rotateSun 20s infinite linear;
+        }
+
+        .sun-center{
+            position:absolute;
+            top:50%;
+            left:50%;
+            width:40px;
+            height:40px;
+            background:radial-gradient(circle, #FCD116 0%, #FCD116 70%, transparent 100%);
+            border-radius:50%;
+            transform:translate(-50%, -50%);
+            box-shadow:0 0 20px rgba(252,209,22,0.8);
+        }
+
+        .sun-ray{
+            position:absolute;
+            top:50%;
+            left:50%;
+            width:60px;
+            height:4px;
+            background:linear-gradient(90deg, #FCD116 0%, transparent 100%);
+            transform-origin:left center;
+            box-shadow:0 0 8px rgba(252,209,22,0.6);
+        }
+
+        .sun-ray:nth-child(1){ transform:translate(-50%, -50%) rotate(0deg); }
+        .sun-ray:nth-child(2){ transform:translate(-50%, -50%) rotate(45deg); }
+        .sun-ray:nth-child(3){ transform:translate(-50%, -50%) rotate(90deg); }
+        .sun-ray:nth-child(4){ transform:translate(-50%, -50%) rotate(135deg); }
+        .sun-ray:nth-child(5){ transform:translate(-50%, -50%) rotate(180deg); }
+        .sun-ray:nth-child(6){ transform:translate(-50%, -50%) rotate(225deg); }
+        .sun-ray:nth-child(7){ transform:translate(-50%, -50%) rotate(270deg); }
+        .sun-ray:nth-child(8){ transform:translate(-50%, -50%) rotate(315deg); }
+
+        @keyframes rotateSun{
+            from{ transform:rotate(0deg); }
+            to{ transform:rotate(360deg); }
+        }
+
+        .overlay{
+            min-height:100vh;
+            background:rgba(0,0,0,0.45);
+            position:relative;
+            z-index:1;
+            padding:60px 20px;
+        }
+
+        /* Header */
+
+        .main-title{
+            font-size:4rem;
+            font-weight:800;
+            text-align:center;
+            color:var(--white);
+            letter-spacing:3px;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.7),
+                0 0 30px rgba(252,209,22,0.8);
+        }
+
+        .main-title .letter-p1{ color: var(--blue); }
+        .main-title .letter-o{ color: var(--red); }
+        .main-title .letter-p2{ color: var(--yellow); }
+        .main-title .letter-p3{ color: var(--white); }
+        .main-title .letter-e{ color: var(--blue); }
+        .main-title .letter-r{ color: var(--red); }
+        .main-title .letter-s{ color: var(--yellow); }
+        .main-title .space{ color: var(--white); }
+        .main-title .letter-p4{ color: var(--blue); }
+        .main-title .letter-i{ color: var(--red); }
+        .main-title .letter-l{ color: var(--yellow); }
+        .main-title .letter-i2{ color: var(--white); }
+        .main-title .letter-p5{ color: var(--blue); }
+        .main-title .letter-i3{ color: var(--red); }
+        .main-title .letter-n{ color: var(--yellow); }
+        .main-title .letter-a{ color: var(--white); }
+        .main-title .letter-s2{ color: var(--blue); }
+
+        .subtitle{
+            text-align:center;
+            color:#f5f5f5;
+            margin-top:10px;
+            margin-bottom:60px;
+            font-size:1.1rem;
+            opacity:0.95;
+        }
+
+        /* Product Cards */
+
+        .product-card{
+            position:relative;
+            overflow:hidden;
+            border-radius:28px;
+            background:rgba(255,255,255,0.10);
+            backdrop-filter:blur(15px);
+            border:1px solid rgba(255,255,255,0.15);
+            transition:0.45s ease;
+            height:100%;
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.35);
+        }
+
+        .product-card::before{
+            content:'';
+            position:absolute;
+            width:220px;
+            height:220px;
+            background:rgba(252,209,22,0.12);
+            border-radius:50%;
+            top:-80px;
+            right:-80px;
+            transition:0.5s ease;
+        }
+
+        .product-card:hover::before{
+            transform:scale(1.4);
+        }
+
+        .product-card:hover{
+            transform:translateY(-12px) scale(1.02);
+            border-color:rgba(252,209,22,0.4);
+            box-shadow:
+                0 0 20px rgba(255,255,255,0.25),
+                0 0 40px rgba(252,209,22,0.25),
+                0 0 60px rgba(0,56,168,0.35),
+                0 0 80px rgba(206,17,38,0.25);
+        }
+
+        /* Product Image */
+
+        .product-image-container{
+            overflow:hidden;
+            position:relative;
+        }
+
+        .product-image{
+            width:100%;
+            height:260px;
+            object-fit:cover;
+            transition:0.5s ease;
+        }
+
+        .product-card:hover .product-image{
+            transform:scale(1.08) rotate(1deg);
+            filter:brightness(1.08);
+        }
+
+        .floating-badge{
+            position:absolute;
+            top:15px;
+            left:15px;
+            background:linear-gradient(45deg, var(--yellow), #ffec80);
+            color:#111;
+            font-size:0.8rem;
+            font-weight:700;
+            padding:8px 14px;
+            border-radius:50px;
+            box-shadow:0 0 15px rgba(252,209,22,0.6);
+            animation:pulse 2s infinite;
+        }
+
+        @keyframes pulse{
+            0%{
+                transform:scale(1);
+            }
+            50%{
+                transform:scale(1.05);
+            }
+            100%{
+                transform:scale(1);
+            }
+        }
+
+        /* Content */
+
+        .product-content{
+            padding:25px;
+        }
+
+        .product-name{
+            color:white;
+            font-size:1.6rem;
+            font-weight:700;
+            margin-bottom:12px;
+        }
+
+        .price-tag{
+            display:inline-block;
+            background:linear-gradient(45deg, var(--red), var(--blue));
+            color:white;
+            padding:10px 18px;
+            border-radius:50px;
+            font-weight:700;
+            box-shadow:
+                0 0 15px rgba(255,255,255,0.15);
+            transition:0.3s ease;
+        }
+
+        .product-card:hover .price-tag{
+            transform:scale(1.08);
+            box-shadow:
+                0 0 15px rgba(255,255,255,0.35),
+                0 0 25px rgba(206,17,38,0.5),
+                0 0 35px rgba(0,56,168,0.45);
+        }
+
+        .product-desc{
+            color:#f5f5f5;
+            margin-top:18px;
+            line-height:1.7;
+            font-size:0.95rem;
+            opacity:0.92;
+        }
+
+        /* Buttons */
+
+        .button-group{
+            display:flex;
+            gap:12px;
+            margin-top:25px;
+        }
+
+        .buy-btn,
+        .cart-btn{
+            flex:1;
+            border:none;
+            padding:13px;
+            border-radius:14px;
+            font-weight:600;
+            transition:0.35s ease;
+        }
+
+        .buy-btn{
+            background:linear-gradient(45deg, var(--red), var(--blue));
+            color:white;
+        }
+
+        .cart-btn{
+            background:rgba(255,255,255,0.12);
+            color:white;
+            border:1px solid rgba(255,255,255,0.2);
+        }
+
+        .buy-btn:hover{
+            transform:translateY(-3px);
+            box-shadow:
+                0 0 15px rgba(252,209,22,0.45),
+                0 0 35px rgba(206,17,38,0.45);
+        }
+
+        .cart-btn:hover{
+            background:rgba(255,255,255,0.2);
+            transform:translateY(-3px);
+            box-shadow:
+                0 0 15px rgba(255,255,255,0.25);
+        }
+
+        /* Tiny Hover Shine */
+
+        .product-card::after{
+            content:'';
+            position:absolute;
+            top:-100%;
+            left:-100%;
+            width:200%;
+            height:200%;
+            background:linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.10),
+                transparent
+            );
+            transform:rotate(25deg);
+            transition:0.7s;
+        }
+
+        .product-card:hover::after{
+            top:100%;
+            left:100%;
+        }
+
+        /* Responsive */
+
+        @media(max-width:992px){
+
+            .main-title{
+                font-size:3rem;
+            }
+
+            .product-image{
+                height:220px;
+            }
+
+        }
+
+        @media(max-width:768px){
+
+            .main-title{
+                font-size:2.3rem;
+            }
+
+            .subtitle{
+                font-size:0.95rem;
+            }
+
+            .product-content{
+                padding:20px;
+            }
+
+            .button-group{
+                flex-direction:column;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Glows -->
+    <div class="bg-glow one"></div>
+    <div class="bg-glow two"></div>
+    <div class="bg-glow three"></div>
+
+    <!-- Stars and Sparkles -->
+    <div class="stars">
+        <!-- Small twinkling stars -->
+        <div class="star" style="top:10%; left:15%; width:4px; height:4px;"></div>
+        <div class="star" style="top:25%; left:80%; width:5px; height:5px;"></div>
+        <div class="star" style="top:40%; left:10%; width:3px; height:3px;"></div>
+        <div class="star" style="top:60%; left:85%; width:4px; height:4px;"></div>
+        <div class="star" style="top:75%; left:20%; width:5px; height:5px;"></div>
+        <div class="star" style="top:15%; left:60%; width:3px; height:3px;"></div>
+        <div class="star" style="top:50%; left:40%; width:4px; height:4px;"></div>
+        <div class="star" style="top:85%; left:70%; width:5px; height:5px;"></div>
+        <div class="star" style="top:30%; left:45%; width:3px; height:3px;"></div>
+        <div class="star" style="top:65%; left:25%; width:4px; height:4px;"></div>
+        <div class="star" style="top:20%; left:90%; width:5px; height:5px;"></div>
+        <div class="star" style="top:55%; left:5%; width:3px; height:3px;"></div>
+        <div class="star" style="top:80%; left:50%; width:4px; height:4px;"></div>
+        <div class="star" style="top:35%; left:75%; width:5px; height:5px;"></div>
+        <div class="star" style="top:70%; left:35%; width:3px; height:3px;"></div>
+
+        <!-- Floating sparkles -->
+        <div class="sparkle" style="top:15%; left:25%;">✦</div>
+        <div class="sparkle" style="top:45%; left:75%;">✧</div>
+        <div class="sparkle" style="top:70%; left:15%;">✦</div>
+        <div class="sparkle" style="top:25%; left:55%;">✧</div>
+        <div class="sparkle" style="top:60%; left:30%;">✦</div>
+        <div class="sparkle" style="top:35%; left:85%;">✧</div>
+        <div class="sparkle" style="top:80%; left:60%;">✦</div>
+        <div class="sparkle" style="top:50%; left:10%;">✧</div>
+        <div class="sparkle" style="top:20%; left:70%;">✦</div>
+        <div class="sparkle" style="top:65%; left:45%;">✧</div>
+    </div>
+
+    <!-- Philippine Sun -->
+    <div class="philippine-sun">
+        <div class="sun-center"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+        <div class="sun-ray"></div>
+    </div>
+
+    <div class="overlay">
+
+        <div class="container">
+
+            <h1 class="main-title">
+                <span class="letter-p1">P</span><span class="letter-o">O</span><span class="letter-p2">P</span><span class="letter-p3">P</span><span class="letter-e">E</span><span class="letter-r">R</span><span class="letter-s">S</span><span class="space">&nbsp;</span><span class="letter-p4">P</span><span class="letter-i">I</span><span class="letter-l">L</span><span class="letter-i2">I</span><span class="letter-p5">P</span><span class="letter-i3">I</span><span class="letter-n">N</span><span class="letter-a">A</span><span class="letter-s2">S</span>
+            </h1>
+
+            <p class="subtitle">
+                Feel the Rush, crisp, and the addictive explosive Filipino flavor.
+            </p>
+
+            <div class="row g-4">
+
+                {% for product in products %}
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+
+                    <div class="product-card">
+
+                        <!-- Product Image -->
+                        <div class="product-image-container">
+
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}"
+                                     alt="{{ product.prodname }}"
+                                     class="product-image">
+                            {% elif product.image_url %}
+                                <img src="{{ product.image_url }}"
+                                     alt="{{ product.prodname }}"
+                                     class="product-image">
+                            {% else %}
+                                <img src="https://via.placeholder.com/400x260/cccccc/666666?text=No+Image"
+                                     alt="{{ product.prodname }}"
+                                     class="product-image">
+                            {% endif %}
+
+                            <div class="floating-badge">
+                                BEST SELLER
+                            </div>
+
+                        </div>
+
+                        <!-- Product Content -->
+                        <div class="product-content">
+
+                            <div class="product-name">
+                                {{ product.prodname }}
+                            </div>
+
+                            <span class="price-tag">
+                                ₱ {{ product.price }}
+                            </span>
+
+                            <div class="product-desc">
+                                Explosive flavor-loaded chicken poppers with
+                                a dangerously crispy crunch inspired by
+                                Filipino street-food energy.
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="button-group">
+
+                                <button class="buy-btn">
+                                    <i class="bi bi-lightning-charge-fill"></i>
+                                    Buy Now
+                                </button>
+
+                                <button class="cart-btn">
+                                    <i class="bi bi-cart-fill"></i>
+                                    Cart
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
